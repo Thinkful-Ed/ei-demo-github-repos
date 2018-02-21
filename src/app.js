@@ -5,14 +5,20 @@ import {fetchRepos} from './actions';
 export class App extends React.Component {
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.input.value);
         this.props.dispatch(fetchRepos(this.input.value));
     }
 
     render() {
-        const repos = this.props.repos.map((repo, index) => (
-            <li key={index}>{repo}</li>
-        ));
+        let repos;
+        if (this.props.loading) {
+            repos = <li>Loading...</li>;
+        } else if (this.props.error) {
+            repos = <li>Error: {this.props.error}</li>;
+        } else {
+            repos = this.props.repos.map((repo, index) => (
+                <li key={index}>{repo}</li>
+            ));
+        }
 
         return (
             <div>
@@ -32,7 +38,9 @@ export class App extends React.Component {
 }
 
 export const mapStateToProps = (state, props) => ({
-    repos: state.repos
+    repos: state.repos,
+    loading: state.loading,
+    error: state.error
 });
 
 export default connect(mapStateToProps)(App);
