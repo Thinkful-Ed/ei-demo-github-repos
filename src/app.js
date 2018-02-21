@@ -6,7 +6,7 @@ export class App extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         console.log(this.input.value);
-        this.props.dispatch(fetchRepos);
+        this.props.dispatch(fetchRepos(this.input.value));
     }
 
     render() {

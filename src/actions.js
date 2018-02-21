@@ -1,3 +1,3 @@
-export const fetchRepos = () => {
-    console.log('Hello world');
+export const fetchRepos = username => () => {
+    console.log('Hello', username);
 };
