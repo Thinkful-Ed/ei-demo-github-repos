@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {fetchRepos} from './actions';
 
 export class App extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         console.log(this.input.value);
+        this.props.dispatch(fetchRepos);
     }
 
     render() {
